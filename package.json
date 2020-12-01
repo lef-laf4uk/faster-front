@@ -1,0 +1,63 @@
+{
+  "name": "faster_front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp prod --production",
+    "lint:styles": "stylelint \"app/**/*.scss\" --syntax=scss",
+    "lint:styles --fix": "stylelint \"app/**/*.scss\" --syntax=scss --fix",
+    "lint:scripts": "eslint --color ./app/blocks",
+    "lint:scripts --fix": "eslint --fix --color ./app/blocks",
+    "block:m": "node createModule.js",
+    "block:c": "node createComponent.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "luther",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/register": "^7.12.1",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "browser-sync": "^2.26.13",
+    "del": "^6.0.0",
+    "eslint": "^7.14.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-if": "^3.0.0",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-pug": "^4.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-svg-sprite": "^1.5.0",
+    "lint-staged": "^10.5.2",
+    "require-dir": "^1.2.0",
+    "stylelint": "^13.8.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-selector-bem-pattern": "^2.1.0",
+    "webpack": "^5.8.0",
+    "webpack-stream": "^6.1.1",
+    "yargs": "^16.1.1"
+  },
+  "dependencies": {
+    "swiper": "^6.3.5"
+  },
+  "lint-staged": {
+    "!(_*).scss": [
+      "stylelint --fix --color --config ./.stylelintrc"
+    ],
+    "*.js": [
+      "eslint --fix --color"
+    ]
+  }
+}
