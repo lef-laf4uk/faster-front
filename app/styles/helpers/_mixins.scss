@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+@mixin font($fname, $fstyle, $fweight, $furl) {
+    @font-face {
+        font-family: quote($fname);
+        font-style: $fstyle;
+        font-weight: $fweight;
+        font-display: swap;
+        src: local($fname), url(#{$furl}.woff2) format("woff2");
+    }
+}
+
+@mixin box($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+@mixin cover-bg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+

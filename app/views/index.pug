@@ -1,0 +1,13 @@
+extends layouts/layouts
+include helpers/mixins
+
+block head
+	- const title = "projectname";
+	- const description = "Website";
+	- const thcolor = "#000";
+
+block content
+	include ../blocks/modules/_modules
+
+block scripts
+	script(src="js/app.js")

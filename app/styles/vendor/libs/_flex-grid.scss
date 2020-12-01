@@ -1,0 +1,151 @@
+$grid-columns: 12 !default;
+$gutter: 30px !default;
+$default-max-w: 1170px !default;
+$flex-grid-type: skeleton !default; // Принимает значения: skeleton / margin-offset
+$flex-grid-stack: margin-bottom !default; // Принимает значения: margin-bottom / margin-top / margin-both / null
+
+//------------------------------------------------------------------------------
+//  Генератор правил для контейнера
+//------------------------------------------------------------------------------
+
+@mixin flex-wrap($max-w: null) {
+    width: calc(100% - #{$gutter * 2});
+    margin: 0 auto;
+    position: relative;
+
+    @if $max-w !=null {
+        max-width: $max-w;
+    }
+
+    @else if $max-w {
+        $max-w: $default-max-w;
+        max-width: $max-w;
+    }
+}
+
+//------------------------------------------------------------------------------
+//  Генератор правил для прямого родителя модульной сетки
+//------------------------------------------------------------------------------
+
+@mixin flex-grid($fd: null,
+    $fw: wrap,
+    $ff: null,
+    $jc: null,
+    $ai: null,
+    $ac: null,
+    $display: flex) {
+
+    @if $fd {
+        flex-direction: $fd;
+    }
+
+    @if $fw {
+        flex-wrap: $fw;
+    }
+
+    @if $ff {
+        flex-flow: $ff;
+    }
+
+    @if $jc {
+        justify-content: $jc;
+    }
+
+    @if $ai {
+        align-items: $ai;
+    }
+
+    @if $ac {
+        align-content: $ac;
+    }
+
+    @if $display {
+        display: $display;
+    }
+
+    @if $flex-grid-type==skeleton {
+        @if $gutter {
+            margin-left: $gutter / -2;
+            margin-right: $gutter / -2;
+        }
+    }
+
+    @if $flex-grid-type==margin-offset {
+        @if $gutter {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    @content;
+}
+
+//------------------------------------------------------------------------------
+//  Генератор ширины ячейки
+//------------------------------------------------------------------------------
+
+@mixin get-width($column: null, $col-offset: null, $columns: $grid-columns, $width: auto) {
+    @if type-of($column)==number and unitless($column)==true {
+        $width: percentage($column / $columns);
+        flex: 0 0 $width;
+        max-width: $width;
+    }
+
+    @else if type-of($column)==number and unitless($column)==false {
+        flex: 0 0 $column;
+    }
+
+    @else if type-of($column)==string and $column=="auto" {
+        flex: 1 1 auto;
+    }
+
+    @else if type-of($column)==string and $column=="equal" {
+        flex: 1 1 0;
+    }
+
+    @else if type-of($column)==string and $column=="none" {
+        flex: 0 0 auto;
+    }
+
+    @else if type-of($column)==string and $column=="initial" {
+        flex: 0 1 auto;
+    }
+
+    @if $gutter and unitless($gutter)==false {
+        @if $flex-grid-type==skeleton {
+            margin-left: $gutter / 2;
+            margin-right: $gutter / 2;
+        }
+
+        @if $flex-grid-stack !=null {
+            @if $flex-grid-stack==margin-top {
+                margin-top: $gutter;
+            }
+
+            @else if $flex-grid-stack==margin-bottom {
+                margin-bottom: $gutter;
+            }
+
+            @else if $flex-grid-stack==margin-both {
+                margin-top: $gutter / 2;
+                margin-bottom: $gutter / 2;
+            }
+        }
+    }
+}
+
+//------------------------------------------------------------------------------
+//  Генератор правил для одной ячейки
+//------------------------------------------------------------------------------
+
+@mixin col($column: null, $col-offset: null, $columns: $grid-columns) {
+    @include get-width($column, $columns);
+}
+
+//------------------------------------------------------------------------------
+//  Генератор правил для отступа одной ячейки
+//------------------------------------------------------------------------------
+
+@mixin col-offset($column: null, $columns: $grid-columns, $screen: null) {
+    margin-left: ($column * 100% / $columns);
+}

@@ -1,0 +1,544 @@
+$screen-xs:                   0 !default;
+$screen-sm:                   480px !default;
+$screen-md:                   768px !default;
+$screen-lg:                   992px !default;
+$screen-xl:                   1200px !default;
+$screen-xxl:                  1800px !default;
+
+$container-sm:                100% !default;
+$container-md:                100% !default;
+$container-lg:                ($screen-lg - 30) !default;
+$container-xl:                ($screen-xl - 30) !default;
+$container-xxl:               ($screen-xxl - 30) !default;
+
+$grid-columns:                12 !default;
+$grid-gutter-width:           30px !default;
+
+
+
+//------------------------------------------------------------------------------
+//  Генератор правил для контейнера
+//------------------------------------------------------------------------------
+
+@mixin container (
+  $xs-grid-gutter:  $grid-gutter-width,
+  $sm-grid-gutter:  $grid-gutter-width,
+  $md-grid-gutter:  $grid-gutter-width,
+  $lg-grid-gutter:  $grid-gutter-width,
+  $xl-grid-gutter:  $grid-gutter-width,
+  $xxl-grid-gutter: $grid-gutter-width
+) {
+  display: block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @if ($xs-grid-gutter != 0) {
+    padding-left: ($xs-grid-gutter / 2);
+    padding-right: ($xs-grid-gutter / 2);
+  }
+
+  @media (min-width: $screen-sm) {
+    width: $container-sm;
+
+    @if ($sm-grid-gutter != $xs-grid-gutter) {
+      padding-left: ($sm-grid-gutter / 2);
+      padding-right: ($sm-grid-gutter / 2);
+    }
+  }
+
+  @media (min-width: $screen-md) {
+    width: $container-md;
+
+    @if ($md-grid-gutter != $sm-grid-gutter) {
+      padding-left: ($md-grid-gutter / 2);
+      padding-right: ($md-grid-gutter / 2);
+    }
+  }
+
+  @media (min-width: $screen-lg) {
+    width: $container-lg;
+
+    @if ($lg-grid-gutter != $md-grid-gutter) {
+      padding-left: ($lg-grid-gutter / 2);
+      padding-right: ($lg-grid-gutter / 2);
+    }
+  }
+
+  @media (min-width: $screen-xl) {
+    width: $container-xl;
+
+    @if ($xl-grid-gutter != $lg-grid-gutter) {
+      padding-left: ($xl-grid-gutter / 2);
+      padding-right: ($xl-grid-gutter / 2);
+    }
+  }
+
+  @media (min-width: $screen-xxl) {
+    width: $container-xxl;
+
+    @if ($xxl-grid-gutter != $xl-grid-gutter) {
+      padding-left: ($xxl-grid-gutter / 2);
+      padding-right: ($xxl-grid-gutter / 2);
+    }
+  }
+}
+
+
+
+//------------------------------------------------------------------------------
+//  Генератор правил для прямого родителя модульной сетки
+//------------------------------------------------------------------------------
+//  Принимает:         По умолчанию:        Пояснение:
+//  $xs-grid-gutter:   $grid-gutter-width   промежуток между ячейками XS-сетки
+//  $sm-grid-gutter:   $grid-gutter-width   промежуток между ячейками SM-сетки
+//  $md-grid-gutter:   $grid-gutter-width   промежуток между ячейками MD-сетки
+//  $lg-grid-gutter:   $grid-gutter-width   промежуток между ячейками LG-сетки
+//  $xl-grid-gutter:   $grid-gutter-width   промежуток между ячейками XL-сетки
+//  $xxl-grid-gutter:  $grid-gutter-width   промежуток между ячейками XXL-сетки
+//------------------------------------------------------------------------------
+// Пример вызова:
+// .some-class {
+//   @include row (
+//     $xs-grid-gutter:  $grid-gutter-width, // отступ по умолчанию
+//     $sm-grid-gutter:  0,                  // нет отступа
+//     $md-grid-gutter:  $grid-gutter-width  // отступ по умолчанию
+//   );
+// }
+//
+// Идентичный вызов:
+// .some-class {
+//   @include row ( $grid-gutter-width, 0, $grid-gutter-width );
+// }
+//------------------------------------------------------------------------------
+
+@mixin row (
+  $xs-grid-gutter:  $grid-gutter-width,
+  $sm-grid-gutter:  $grid-gutter-width,
+  $md-grid-gutter:  $grid-gutter-width,
+  $lg-grid-gutter:  $grid-gutter-width,
+  $xl-grid-gutter:  $grid-gutter-width,
+  $xxl-grid-gutter: $grid-gutter-width
+) {
+  display: flex;
+  flex-wrap: wrap;
+
+  & > * { // stylelint-disable-line  selector-combinator-blacklist, plugin/selector-bem-pattern
+    flex-basis: 100%;
+  }
+
+  @if ($xs-grid-gutter != 0) {
+    margin-left: ($xs-grid-gutter / -2);
+    margin-right: ($xs-grid-gutter / -2);
+  }
+
+  @if ($sm-grid-gutter != $xs-grid-gutter) {
+
+    @media (min-width: $screen-sm) {
+      margin-left: ($sm-grid-gutter / -2);
+      margin-right: ($sm-grid-gutter / -2);
+    }
+  }
+
+  @if ($md-grid-gutter != $sm-grid-gutter) {
+
+    @media (min-width: $screen-md) {
+      margin-left: ($md-grid-gutter / -2);
+      margin-right: ($md-grid-gutter / -2);
+    }
+  }
+
+  @if ($lg-grid-gutter != $md-grid-gutter) {
+
+    @media (min-width: $screen-lg) {
+      margin-left: ($lg-grid-gutter / -2);
+      margin-right: ($lg-grid-gutter / -2);
+    }
+  }
+
+  @if ($xl-grid-gutter != $lg-grid-gutter) {
+
+    @media (min-width: $screen-xl) {
+      margin-left: ($xl-grid-gutter / -2);
+      margin-right: ($xl-grid-gutter / -2);
+    }
+  }
+
+  @if ($xxl-grid-gutter != $xl-grid-gutter) {
+
+    @media (min-width: $screen-xxl) {
+      margin-left: ($xxl-grid-gutter / -2);
+      margin-right: ($xxl-grid-gutter / -2);
+    }
+  }
+}
+
+
+
+//------------------------------------------------------------------------------
+//  Генератор ширины ячейки
+//------------------------------------------------------------------------------
+//  Принимает:    По умолчанию:         Пояснение:
+//  $column:      1                     ширина (кол-во колонок в этой ячейке)
+//  $columns:     $grid-columns;        количество ячеек в ряду
+//
+//  Возвращает width.
+//------------------------------------------------------------------------------
+
+@mixin get-width ($column: 1, $columns: $grid-columns) {
+  $width: (100% / $columns) * $column;
+  flex: 0 0 $width;
+  max-width: $width;
+}
+
+
+
+//------------------------------------------------------------------------------
+//  Генератор правил для одной ячейки
+//------------------------------------------------------------------------------
+//  Принимает:    По умолчанию:         Пояснение:
+//  $column:      1                     ширина (кол-во колонок для этой ячейки)
+//  $columns:     $grid-columns;        общее количество ячеек на 1 ряд
+//  $gutter:      $grid-gutter-width    промежуток между ячейками
+//------------------------------------------------------------------------------
+
+@mixin make-col (
+  $column:  1,
+  $columns: $grid-columns,
+  $gutter:  $grid-gutter-width
+) {
+  @include get-width($column, $columns);
+
+  // ВНИМАНИЕ!
+  // если $gutter == false, в CSS не попадут правила padding-left и padding-right
+  @if ($gutter != false) {
+    padding-left: ($gutter / 2);
+    padding-right: ($gutter / 2);
+  }
+}
+
+
+
+//------------------------------------------------------------------------------
+//  Генератор правил для одной ячейки с возможностью указать @media
+//------------------------------------------------------------------------------
+//  Принимает:    По умолчанию:         Пояснение:
+//  $screen:      xs                    тип сетки [xs|sm|md|lg|xl|xxl]
+//  $column:      $grid-columns         ширина (кол-во колонок для этой ячейки)
+//  $columns:     $grid-columns;        общее количество ячеек на 1 ряд
+//  $gutter:      $grid-gutter-width    промежуток между ячейками
+//------------------------------------------------------------------------------
+
+@mixin col (
+  $screen:  xs,
+  $column:  $grid-columns,
+  $columns: $grid-columns,
+  $gutter:  $grid-gutter-width
+) {
+
+  @if ($screen == xs) {
+    @include make-col($column, $columns, $gutter);
+  }
+
+  @if ($screen == sm) {
+
+    @media (min-width: $screen-sm) {
+      @include make-col($column, $columns, $gutter);
+    }
+  }
+
+  @if ($screen == md) {
+
+    @media (min-width: $screen-md) {
+      @include make-col($column, $columns, $gutter);
+    }
+  }
+
+  @if ($screen == lg) {
+
+    @media (min-width: $screen-lg) {
+      @include make-col($column, $columns, $gutter);
+    }
+  }
+
+  @if ($screen == xl) {
+
+    @media (min-width: $screen-xl) {
+      @include make-col($column, $columns, $gutter);
+    }
+  }
+
+  @if ($screen == xxl) {
+
+    @media (min-width: $screen-xxl) {
+      @include make-col($column, $columns, $gutter);
+    }
+  }
+}
+
+
+
+//------------------------------------------------------------------------------
+//  Генератор правил для отступа одной ячейки с возможностью указать @media
+//------------------------------------------------------------------------------
+//  Принимает:    По умолчанию:         Пояснение:
+//  $screen:      xs                    тип сетки [xs|sm|md|lg|xl|xxl]
+//  $column:      1                     ширина отступа (кол-во колонок)
+//  $columns:     $grid-columns;        общее количество ячеек на 1 ряд
+//------------------------------------------------------------------------------
+
+@mixin col-offset (
+  $screen: xs,
+  $column: 1,
+  $columns: $grid-columns
+) {
+
+  @if ($screen == xs) {
+    margin-left: ($column * 100% / $columns);
+  }
+
+  @if ($screen == sm) {
+
+    @media (min-width: $screen-sm) {
+      margin-left: ($column * 100% / $columns);
+    }
+  }
+
+  @if ($screen == md) {
+
+    @media (min-width: $screen-md) {
+      margin-left: ($column * 100% / $columns);
+    }
+  }
+
+  @if ($screen == lg) {
+
+    @media (min-width: $screen-lg) {
+      margin-left: ($column * 100% / $columns);
+    }
+  }
+
+  @if ($screen == xl) {
+
+    @media (min-width: $screen-xl) {
+      margin-left: ($column * 100% / $columns);
+    }
+  }
+
+  @if ($screen == xxl) {
+
+    @media (min-width: $screen-xxl) {
+      margin-left: ($column * 100% / $columns);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$flexbox-grid-mixins-grid-type: skeleton !default;
+$flexbox-grid-mixins-stack: margin-bottom !default;
+
+@mixin grid(
+    $display: flex,
+    $fd: null,
+    $fw: wrap,
+    $ff: null,
+    $jc: null,
+    $ai: null,
+    $ac: null,
+    $gutter: null) {
+
+	@if $display {
+		display: $display;
+	}
+	@if $fd {
+		flex-direction: $fd;
+	}
+	@if $fw {
+		flex-wrap: $fw;
+	}
+	@if $ff {
+		flex-flow: $ff;
+	}
+	@if $jc {
+		justify-content: $jc;
+	}
+	@if $ai {
+		align-items: $ai;
+	}
+	@if $ac {
+		align-content: $ac;
+	}
+
+	@if $flexbox-grid-mixins-grid-type == skeleton {
+		@if $gutter {
+			margin-left: $gutter / 2 * -1;
+			margin-right: $gutter / 2 * -1;
+		}
+	}
+
+	@content;
+}
+
+@mixin grid-col($col: null,
+    $grid-columns: 12,
+    $col-offset: null,
+    $gutter: null,
+    $as: null,
+    $fg: 0,
+    $fsh: 1,
+    $fb: auto,
+    $order: null,
+    $shorthand: true,
+    $last-child: false,
+    $width: null,
+    $max-width: null,
+    $min-width: null,
+    $height: null,
+    $max-height: null,
+    $min-height: null) {
+
+
+	@if type-of($col) == number and unitless($col) == true {
+		$fsh: 0;
+		$fb: percentage($col / $grid-columns);
+
+		@if $flexbox-grid-mixins-grid-type == skeleton {
+			@if $gutter and unit($gutter) == '%' {
+				$fb: $fb - $gutter;
+			} @else if $gutter and unitless($gutter) == false {
+				$fb: calc( #{$fb} - #{$gutter});
+			}
+
+		} @else if $flexbox-grid-mixins-grid-type == margin-offset {
+			@if $gutter and unit($gutter) == '%' {
+				$fb: (100% - ($gutter * ($grid-columns / $col - 1))) / ($grid-columns / $col);
+			} @else if $gutter and unitless($gutter) == false {
+				$fb: calc( #{$fb} - #{$gutter * ($grid-columns / $col - 1) / ($grid-columns / $col)});
+			}
+		}
+
+		@if $col-offset and unit($col-offset) == '%' {
+			$fb: $fb + $col-offset;
+		} @else if $col-offset and unitless($col-offset) == false {
+			$fb: calc( #{$fb} + #{$col-offset});
+		}
+	} @else if type-of($col) == number and unitless($col) == false {
+		$fg: 0;
+		$fsh: 0;
+		$fb: $col;
+	} @else if type-of($col) == string and $col == 'auto' {
+		// flex: auto;
+		$fg: 1;
+		$fsh: 1;
+		$fb: auto;
+	} @else if type-of($col) == string and $col == 'equal' {
+		// flex: 1;
+		$fg: 1;
+		$fsh: 1;
+		$fb: 0;
+	} @else if type-of($col) == string and $col == 'none' {
+		// flex: none;
+		$fg: 0;
+		$fsh: 0;
+		$fb: auto;
+	} @else if type-of($col) == string and $col == 'initial' {
+		// flex: initial;
+		$fg: 0;
+		$fsh: 1;
+		$fb: auto;
+	} @else if type-of($col) == string and $col == 'positive' {
+		// positive number
+		@if $fg == 0 {
+			$fg: 1;
+		}
+		$fsh: 0;
+		$fb: 0;
+	}
+
+	@if type-of($shorthand) == bool and $shorthand == true {
+		flex: $fg $fsh $fb;
+	} @else {
+		flex-basis: $fb;
+		flex-grow: $fg;
+		flex-shrink: $fsh;
+	}
+
+	@if $as != null {
+		align-self: $as;
+	}
+
+	@if type-of($order) == number {
+		order: $order;
+	}
+
+	@if type-of($width) == bool and $width == true {
+		width: $fb;
+	} @else if type-of($width) == number and unitless($width) == false {
+		width: $width;
+	} @else if type-of($width) == string and $width == 'auto' {
+		width: auto;
+	}
+
+	@if type-of($max-width) == bool and $max-width == true {
+		max-width: $fb;
+	} @else if type-of($max-width) == number and unitless($max-width) == false {
+		max-width: $max-width;
+	} @else if type-of($max-width) == string and $max-width == 'auto' {
+		max-width: auto;
+	}
+
+	@if type-of($min-width) == bool and $min-width == true {
+		min-width: $fb;
+	} @else if type-of($min-width) == number and unitless($min-width) == false {
+		min-width: $min-width;
+	} @else if type-of($min-width) == string and $min-width == 'auto' {
+		min-width: auto;
+	}
+
+	@if $height != null {
+		height: $height;
+	}
+	@if $max-height != null {
+		max-height: $max-height;
+	}
+	@if $min-height != null {
+		min-height: $min-height;
+	}
+
+	@if $gutter and unitless($gutter) == false {
+		@if $flexbox-grid-mixins-grid-type == skeleton {
+			margin-left: $gutter / 2;
+			margin-right: $gutter / 2;
+		} @else if $flexbox-grid-mixins-grid-type == margin-offset {
+			@if type-of($last-child) == bool and $last-child == true {
+				margin-right: 0;
+			} @else {
+				margin-right: $gutter;
+			}
+        }
+        
+        @if $flexbox-grid-mixins-stack != null {
+            @if $flexbox-grid-mixins-stack == margin-top {
+                margin-top: $gutter;
+            } @else if $flexbox-grid-mixins-stack == margin-bottom {
+                margin-bottom: $gutter;
+            } @else if $flexbox-grid-mixins-stack == margin-both {
+                margin-top: $gutter / 2;
+                margin-bottom: $gutter / 2;
+            }
+        }
+	}
+	@content;
+}

@@ -1,0 +1,113 @@
+// font-weight helper:
+// 100 Extra Light or Ultra Light;
+// 200 Light or Thin; 300 Book or Demi;
+// 400 Regular or Normal;
+// 500 Medium;
+// 600 Semibold or Demibold;
+// 700 Bold;
+// 800 Black or Extra Bold or Heavy;
+// 900 Extra Black or Fat or Ultra Black
+@include font('Roboto', normal, 400, '../fonts/roboto/roboto-regular-webfont');
+@include font('Roboto', italic, 400, '../fonts/roboto/roboto-italic-webfont');
+@include font('Roboto', normal, 700, '../fonts/roboto/roboto-bold-webfont');
+@include font('Roboto', italic, 700, '../fonts/roboto/roboto-bolditalic-webfont');
+
+/*==========  Desktop First  ==========*/
+
+@media only screen and (max-width : 1200px) {
+
+}
+
+@media only screen and (max-width : 992px) {
+
+}
+
+@media only screen and (max-width : 768px) {
+
+}
+
+@media only screen and (max-width : 576px) {
+
+}
+
+@media only screen and (max-width : 374px) {
+
+}
+
+// GENERAL DOCUMENT STYLES
+
+html {
+    font-family: $roboto;
+    font-size: $fontsize;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    min-width: 320px;
+    position: relative;
+    overflow-x: hidden;
+    color: $textcolor;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+#{headings()},
+p,
+ol,
+ul {
+    margin: 0;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video,
+textarea {
+    vertical-align: middle;
+}
+
+textarea {
+    resize: none;
+}
+
+section {
+    position: relative;
+}
+
+input,
+select,
+button {
+    outline: none;
+}
+
+.wrapper {
+    @include flex-wrap();
+}

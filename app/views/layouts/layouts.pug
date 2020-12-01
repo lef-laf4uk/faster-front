@@ -1,0 +1,25 @@
+block head
+
+doctype html
+html(lang="ru")
+	head
+		meta(charset="UTF-8")
+		//- base(href="#")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		
+		title #{title}
+		meta(name="description", content="" + description)
+
+		link(rel="icon", href="img/favicon/favicon.ico")
+		link(rel="apple-touch-icon", sizes="180x180", href="img/favicon/apple-touch-icon-180x180.png")
+		meta(name="theme-color", content="" + thcolor)
+		meta(property="og:image", content="img/dest/preview.jpg")
+		//- link(rel="canonical", href="#")
+		
+		link(rel="stylesheet", href="styles/main.css")
+		link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.8.2/css/all.css", integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay", crossorigin="anonymous")
+
+	body.page
+		block content
+		block scripts

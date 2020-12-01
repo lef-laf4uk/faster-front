@@ -1,0 +1,17 @@
+@import "mixins";
+
+// USER VARIABLES SECTION
+$textcolor: #fff; // Text Color
+$accent: #FB8203; // Accent Color
+$dark: #171717;
+
+$fontsize: 16px; // Body Font Size
+$system: -apple-system, BlinkMacSystemFont, Arial, sans-serif; // System Font Family
+$roboto: Roboto, sans-serif;
+
+// Grid Setup
+$default-max-w: 1170px;
+$grid-columns: 12;
+$gutter: 30px;
+$flex-grid-type: skeleton; // Принимает значения: skeleton / margin-offset
+$flex-grid-stack: margin-bottom; // Принимает значения: margin-bottom / margin-top / margin-both / null
